@@ -1,0 +1,4 @@
+1) Folder name@Computer Name = found in git bash
+2) Then find 't4' folder in local directory
+3) Place file in t4 folder on local machine
+4) Follow directions to add files in Git Howto document on D2L.
