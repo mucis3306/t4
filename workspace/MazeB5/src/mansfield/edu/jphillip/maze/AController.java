@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseMotionListener;
 
 /**
  * MVC Controller: receives a handle to the View and controls everything
@@ -15,10 +16,10 @@ import java.awt.event.KeyEvent;
  * 
  * @author John Phillips Edited by Justin Kruger
  */
-public class AController implements Runnable {
+public class AController implements Runnable  {
 	private AView view;
 	private MazeBoard board;
-	private MazeBoardFiles mazeFiles;
+	public static MazeBoardFiles mazeFiles;
 	private MazeMidi midi;
 	private MazeMidiFiles midiFiles;
 	private MazeSound sound;
@@ -26,6 +27,7 @@ public class AController implements Runnable {
 	private MazeRobot robot;
 	private Thread runner;
 	private static boolean gameOver=true;
+	private static boolean collected=false;
 	
 	/**
 	 * The animation delay is in milliseconds. The value should be >= to 1.
@@ -60,6 +62,7 @@ public class AController implements Runnable {
 	 */
 	private void setupBoardAndPlayers() {
 		gameOver = true;
+		if ( ControlPanel.counterOutputTF.getText().equals("") ) ControlPanel.counterOutputTF.setText("0");
 		board = new MazeBoard(mazeFiles.getMazeFileName());
 		int r = board.getStartRow();
 		int c = board.getStartCol();
@@ -106,6 +109,11 @@ public class AController implements Runnable {
 		return gameOver;
 	}
 	
+	public static boolean getCollected() {
+		return collected;
+	}
+	
+	
 	/**
 	 * Repaints the drawingPanel and returns focus to the frame which
 	 * listens for key presses.
@@ -141,6 +149,16 @@ public class AController implements Runnable {
 		}
 	}
 	
+	/**
+	 * Checks to see if the player has reached a collectable.
+	 */
+	private void checkCollected() {
+		if (board.isCollected(human.getRow(), human.getCol()) == true) {
+			collected = true;
+			//sound.coin();
+		}
+	}
+	
 	
 	/**
 	 * Adds animation to the game allowing a robot object to move around
@@ -159,6 +177,7 @@ public class AController implements Runnable {
 			 System.exit(0);
 			 }
 			if(!gameOver) {
+				checkCollected();
 				robot.moveRobot(board);
 				// collision detection
 				if((robot.getRow() == human.getRow()) && (robot.getCol() == human.getCol()))
@@ -190,6 +209,8 @@ public class AController implements Runnable {
 				new NextBtnActionListener());
 		view.controlPanel.addAgainBtnActionListener(
 				new AgainBtnActionListener());
+		//view.drawingPanel.addMouseMotionListener(
+		//		new MyMouseListener());
 		view.controlPanel.addPlayerColorCBActionListener(
 				new PlayerColorCBActionListener());
 		view.controlPanel.addPlayerShapeCBActionListener(
@@ -219,6 +240,47 @@ public class AController implements Runnable {
 		}
 	}
 	
+	/**
+	 * Detects when the mouse is moved and moves the player icon through
+	 * the maze. Sounds are used to indicate whether the maze wall is hit.
+	 */
+	/*
+	class MyMouseListener implements MouseMotionListener {
+		boolean hitWall = true;
+		
+		int prevX, prevY;
+		
+		//addMouseListener (new MouseAdapter() {
+		public void mouseDragged(MouseEvent e) {
+			int r = human.getRow();
+			int c = human.getCol();
+			int d = view.drawingPanel.getMazeSquareSize();
+
+			if ( e.getX() < prevX - d && board.getChar( r , c - 1 ) != 'x' ) {
+				human.moveWest();
+				prevX = e.getX();
+				prevY = e.getY();
+			}
+			if ( e.getX() > prevX + d && board.getChar( r, c + 1 ) != 'x' ) {
+				human.moveEast();
+				prevX = e.getX();
+				prevY = e.getY();
+			}
+			if ( e.getY() < prevY - d && board.getChar( r - 1, c ) != 'x' ) {
+				human.moveNorth();
+				prevX = e.getX();
+				prevY = e.getY();
+			}
+			if ( e.getY() > prevY + d && board.getChar( r + 1, c ) != 'x' ) {
+				human.moveSouth();
+				prevX = e.getX();
+				prevY = e.getY();
+			}
+		
+
+			refresh();
+		}*/
+	
 	/** 
 	 * When nextBtn is clicked the next (harder) maze file is loaded and the
 	 * game is restarted.
@@ -244,6 +306,8 @@ public class AController implements Runnable {
 			setupBoardAndPlayers();
 		}
 	}
+	
+	
 
 	/**
 	 * The color combo box allows the player to choose different colors for

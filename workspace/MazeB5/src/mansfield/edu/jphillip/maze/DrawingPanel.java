@@ -146,6 +146,8 @@ public class DrawingPanel extends JPanel {
 			return (new Color(255,193,37));
 		else if (c == 'x')
 			return (new Color(20, 20, 200));
+		else if (c == '7')
+			return ( Color.yellow);
 		return new Color(0, 0, 0);
 	}
 

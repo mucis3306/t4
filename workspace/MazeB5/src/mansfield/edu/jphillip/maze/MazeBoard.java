@@ -19,12 +19,15 @@ public class MazeBoard implements MazeBoardInterface {
 	private int startCol = 1;
 	private int pstartRow = 1;
 	private int pstartCol = 1;
+	public static int counter, goal;
 	private int endRow, endCol;
 	private String version;
 	private static Random gen = new Random();
+	public String currentmaze ;
 
 	public MazeBoard(String fileName) {
 		createBoard(fileName);
+		currentmaze = AController.mazeFiles.getMazeFileName();
 		endCol = mArray[0].length;
 		endRow = mArray.length;
 	}
@@ -48,7 +51,7 @@ public class MazeBoard implements MazeBoardInterface {
 
 		makeStartList();
 		chooseRandomStart();
-		
+
 		makePatrol1StartList();
 		choosePatrolRandomStart();
 	}
@@ -66,7 +69,53 @@ public class MazeBoard implements MazeBoardInterface {
 		}
 		startList.trimToSize();
 	}
+
+	/**
+	 * Checks to see if current space is a collectible. 
+	 * Increments counter if it is and displays the counter on the drawing panel. 
+	 */
+	@Override
+	public boolean isCollected(int row, int col)
+	{	
+		
+		if(currentmaze.equalsIgnoreCase("m2000.txt"))
+		{
+			if (mArray[row][col] == '7')
+			{
+				counter += 1;
+				ControlPanel.counterOutputTF.setText(Integer.toString(counter));
+				mArray[row][col] = 'f';
+				System.out.println("worked");
+				return true;
+			}
+		} else if(currentmaze.equalsIgnoreCase("m1000.txt")) {
+			if (mArray[row][col] == '7') {
+				counter += 1;
+				ControlPanel.counterOutputTF.setText(Integer.toString(counter));
+				mArray[row][col] = 'g';
+				System.out.println("worked");
+				return true;
+			}
+		}
 	
+		
+		return false;
+	}
+
+	/**
+	 * Checks to see player has gathered all collectables before finishing the maze.
+	 */
+	@Override
+	public boolean isAllCollected(int counter)
+	{
+		if (counter < goal)
+		{
+			return false;
+		}
+		else
+			return true;
+	}
+
 	/**
 	 * Generates the starting point 0f the A.I. for the maze
 	 */
@@ -76,7 +125,7 @@ public class MazeBoard implements MazeBoardInterface {
 			for (int col = 1; col < endCol - 1; col++) {
 				if (mArray[row][col] == '1' || mArray[row][col] == '2'|| mArray[row][col] == '3'
 					|| mArray[row][col] == '4' || mArray[row][col] == '5'|| mArray[row][col] == '6'
-					|| mArray[row][col] == '7' || mArray[row][col] == '8'|| mArray[row][col] == '9')
+						|| mArray[row][col] == '8'|| mArray[row][col] == '9')
 					pstartList.add(new Dimension(row, col));
 			}
 		}
@@ -114,7 +163,7 @@ public class MazeBoard implements MazeBoardInterface {
 		char c = mArray[row][col];
 		if (c == '-' || c == 's' || c == 'e' || c == 'g' || c == 'b' || c == '1' 
 			|| c == '2' || c == 'f'|| c =='3' || c == 'r' || c == 'u' || c == '4' || c == '5' 
-				|| c == 'd' || c == '6'  || c == '9' || c == 'h') {
+				|| c == 'd' || c == '6'  || c == '9' || c == 'h' || c == '7') {
 			return true;
 		}
 		return false;
@@ -173,7 +222,7 @@ public class MazeBoard implements MazeBoardInterface {
 	public int getPStartCol() {
 		return pstartCol;
 	}
-	
+
 	@Override
 	/**
 	 * Gathers the character in the maze .txt file located at the current row and column value

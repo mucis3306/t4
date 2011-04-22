@@ -23,6 +23,7 @@ public class ControlPanel extends JPanel {
 	JComboBox playerColorCB;
 	JComboBox playerShapeCB;
 	JTextField nameTF;
+	public static JTextField counterOutputTF;
 	JButton lastBtn, nextBtn, againBtn;
 
 	/**
@@ -51,6 +52,13 @@ public class ControlPanel extends JPanel {
 
 		againBtn = new JButton("Restart Level");
 		this.add(againBtn);
+		
+		JLabel counterLbl = new JLabel("Items Collected:");
+		this.add(counterLbl);
+		
+		counterOutputTF = new JTextField(20);
+		counterOutputTF.setEditable(false);
+		this.add(counterOutputTF);
 	}
 
 	public void setNameTF(String name) {

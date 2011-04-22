@@ -25,6 +25,10 @@ public interface MazeBoardInterface {
 	public int getEndCol();
 
 	public char getChar(int row, int col);
+	
+	public boolean isAllCollected(int counter);
+	
+	public boolean isCollected(int row, int col);
 
 	public String getVersion();
 

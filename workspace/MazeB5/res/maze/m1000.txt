@@ -4,11 +4,11 @@ version=1
 xxxxxxxxxxxxxxxx
 xsgwgccccccccccx
 xggbgccccccccccx
-xggbgggggwgggccx
+xggbggg7gwgggccx
 xggwwwwwwwgggccx
 xggggggggwgggccx
 xccccggggwgggccx
 xgggg1111bgggecx
 xgccc1111bgggccx
-xgggc1111wgggccx
+xgg7c1171wgggccx
 xxxxxxxxxxxxxxxx
