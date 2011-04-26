@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<title>MUAdventureGame Store</title>
+		<style type="text/css">
+			body
+			{
+				background-color: goldenrod;
+				margin: 10%;
+			}
+			h1, h2 {font-variant: small-caps;}
+		</style>
+
+	</head>
+	<body>
+	<h1>Welcome to the MUAdventureGame Store</h1>
+	<hr />
+	<h2>Introduction</h2>
+	<hr />
+	<p>This game is a final project for BPC II at Mansfield University. This is <strong><em>not</em></strong> a real game for sale.</p>
+	<p>View our main website at <a href="http://muadventuregame.wordpress.com">WordPress.</a></p>
+	<fieldset>
+   		<legend>Order Form</legend>
+   		<form name="info" action="process.php" method="post">
+    		<div id="form-contents">
+    		<p>
+   			<label for="fname">First Name:</label>
+			<input type="text" name="fname" id="fname" />
+			<br />
+			<label for="lname">Last Name:</label>
+			<input type="text" name="lname" id="lname" />
+			</p>
+			<table>
+				<tr>
+					<td><label for="address1">Address Line 1:</label></td>
+					<td><input type="text" name="address1" id="address1" /></td>
+				</tr>
+				<tr>
+					<td><label for="address2">Address Line 2:</label></td>
+					<td><input type="text" name="address2" id="address2" /></td>
+				</tr>
+				<tr>
+					<td><label for="city">City:</label></td>
+					<td><input type="text" name="city" id="city" /></td>
+				</tr>
+				<tr>
+					<td><label for="state">State:</label></td>
+					<td><input type="text" name="state" id="state" /></td>
+				</tr>
+				<tr>
+					 <td><label for="zip">Zip Code:</label></td>
+					 <td><input type="text" name="zip" id="zip" /></td>
+				</tr>
+      			</table>
+			<br />
+			<p>
+			<input type="submit" name="submit" value="Place Order"/>
+			</p>
+			</div>
+   		</form>
+   </fieldset>
+   </body>
+</html>
