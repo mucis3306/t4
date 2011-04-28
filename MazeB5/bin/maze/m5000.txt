@@ -1,0 +1,14 @@
+version=1
+11
+16
+xxxxxxxxxxxxxxxx
+xsqrrrrrrqqrrrrx
+xrqrqqqqrrrqrqrx
+xrqrqrrrrq5qrqrx
+xrqrqrqqrq5qrqrx
+xrqrq555555qrqex
+xrrrq5q5q5qrrqqx
+xrqqq5q55555qrrx
+xrqrqrrqqqqqqrqx
+xrrrqqrrrrrrrrqx
+xxxxxxxxxxxxxxxx

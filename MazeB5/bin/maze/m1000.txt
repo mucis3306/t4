@@ -1,0 +1,14 @@
+version=1
+11
+16
+xxxxxxxxxxxxxxxx
+xsgwgccccccccccx
+xggbgccccccccccx
+xggbggg7gwgggccx
+xggwwwwwwwgggccx
+xggggggggwgggccx
+xccccggggwgggccx
+xgggg1111bgggecx
+xgccc1111bgggccx
+xgg7c1171wgggccx
+xxxxxxxxxxxxxxxx

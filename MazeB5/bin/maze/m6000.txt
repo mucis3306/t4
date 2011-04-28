@@ -1,0 +1,14 @@
+version=1
+11
+16
+xxxxxxxxxxxxxxxx
+xdddadaadddddaex
+xdadaddddaaadadx
+xdadadcdaddcdadx
+xdadadcccdacccdx
+xsadddddd6addddx
+xdadadccc6acccdx
+xdadadca66dcaddx
+xdadadaa66daadax
+xddda66666ddddax
+xxxxxxxxxxxxxxxx
