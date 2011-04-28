@@ -13,7 +13,7 @@ import javax.swing.JTextField;
  * 
  * License: CC BY-SA 3.0 http://creativecommons.org/licenses/by-sa/3.0/
  * 
- * @author John Phillips Edited by Justin Kruger
+ * @author John Phillips Edited by Team 4
  */
 public class ControlPanel extends JPanel {
 	private static final long serialVersionUID = 3930070147267264232L;

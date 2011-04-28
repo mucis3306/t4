@@ -12,7 +12,7 @@ package mansfield.edu.jphillip.maze;
  * 
  * Last updated: 3/20/2011
  * 
- * @author John Phillips Edited by Justin Kruger
+ * @author John Phillips Edited by team 4
  * 
  * @version 2.0
  */

@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
  * 
  * License: CC BY-SA 3.0 http://creativecommons.org/licenses/by-sa/3.0/
  * 
- * @author John Phillips Edited by Justin Kruger
+ * @author John Phillips Edited by team 4
  */
 public class MazeViking extends MazeShape {
 	BufferedImage image = null;

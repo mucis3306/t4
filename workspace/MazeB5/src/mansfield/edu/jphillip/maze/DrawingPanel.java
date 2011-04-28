@@ -12,7 +12,7 @@ import javax.swing.JPanel;
  * 
  * License: CC BY-SA 3.0 http://creativecommons.org/licenses/by-sa/3.0/
  * 
- * @author John Phillips Edited by Justin Kruger
+ * @author John Phillips Edited by team 4
  */
 public class DrawingPanel extends JPanel {
 	private static final long serialVersionUID = 4417547627470770942L;
@@ -20,6 +20,7 @@ public class DrawingPanel extends JPanel {
 	private MazeShape human;
 	private MazeRobot robot;
 	private int mazeSquareSize;
+	
 
 	/**
 	 * The constructor sets the size and color of the panel.
@@ -30,6 +31,7 @@ public class DrawingPanel extends JPanel {
 		setBackground(Color.BLACK);
 	}
 
+	public int getMazeSquareSize() { return mazeSquareSize; }
 	/**
 	 * Called to sync the main objects should the controller change them.
 	 * 
@@ -58,11 +60,12 @@ public class DrawingPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		drawBoard(g);
-		drawPlayer(robot, g);
-		drawPlayer(human, g);
-		if (AController.getGameOver() == true)
-			drawWinner(g);
+		if ( !AController.getGameOver() == true) {
+			drawBoard(g);
+			drawPlayer(robot, g);
+			drawPlayer(human, g);
+		}
+		
 	}
 
 	/**
@@ -74,6 +77,11 @@ public class DrawingPanel extends JPanel {
 		int nomHeight = MazeApp.MAZEHEIGHT / (board.getEndRow() - 1);
 		mazeSquareSize = nomWidth < nomHeight ? nomWidth : nomHeight;
 	}
+	/**
+	 * Calculates the size to draw each maze square given the display size 
+	 * and the maze size.
+	 */
+	
 
 	/**
 	 * Determines how to color a given maze square.
@@ -172,11 +180,13 @@ public class DrawingPanel extends JPanel {
 	 * 
 	 * @param g
 	 */
-	public void drawWinner(Graphics g) {
-		Font font = new Font("Arial", Font.BOLD, 200);
+	public void drawWinner() {
+		Graphics g = this.getGraphics();
+		Font font = new Font("Arial", Font.BOLD, 100);
 		g.setFont(font);
 		g.setColor(Color.YELLOW);
-		g.drawString("WINNER!", 80, 350);
+		g.drawString("You Survived!", 150, 300);
+		g.drawString("Score: "+ControlPanel.counterOutputTF.getText(), 270, 450);
 	}
 
 	/**

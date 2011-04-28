@@ -1,10 +1,8 @@
 package mansfield.edu.jphillip.maze;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseMotionListener;
+
+import java.awt.event.*;
+
 
 /**
  * MVC Controller: receives a handle to the View and controls everything
@@ -14,7 +12,7 @@ import java.awt.event.MouseMotionListener;
  * 
  * License: CC BY-SA 3.0 http://creativecommons.org/licenses/by-sa/3.0/
  * 
- * @author John Phillips Edited by Justin Kruger
+ * @author John Phillips Edited by Team 4
  */
 public class AController implements Runnable  {
 	private AView view;
@@ -61,6 +59,7 @@ public class AController implements Runnable  {
 	 * Used to set up a new board, player pieces, sounds, and music.
 	 */
 	private void setupBoardAndPlayers() {
+		
 		gameOver = true;
 		if ( ControlPanel.counterOutputTF.getText().equals("") ) ControlPanel.counterOutputTF.setText("0");
 		board = new MazeBoard(mazeFiles.getMazeFileName());
@@ -76,12 +75,14 @@ public class AController implements Runnable  {
 		if (midi != null) midi.stop();
 		//midiFiles.randomSong();
 		midi = new MazeMidi(midiFiles.getMidiFileName());
-		refresh();
-		gameOver = false;
+		checkCollision();
 		if((robot.getRow()== human.getRow()) && (robot.getCol() == human.getCol()))
 		{
-			setupBoardAndPlayers();
+			MazeBoard.counter=0;
+			ControlPanel.counterOutputTF.setText(Integer.toString(MazeBoard.counter));
 		}
+		refresh();
+		gameOver = false;
 	}
 	
 	/**
@@ -135,27 +136,40 @@ public class AController implements Runnable  {
 			 mazeFiles.nextMaze();
 			 String currentmaze = mazeFiles.getMazeFileName();
 			 mazeFiles.lastMaze();
+			if(currentmaze.equalsIgnoreCase("m9999.txt")){
+			 System.out.println("it worked");
+			 view.drawingPanel.drawWinner();
+			 try {
+				  Thread.sleep(10000);
+				}
+				catch (Exception e) {}
+			 }
 			 // collision detection
-			if((robot.getRow()== human.getRow()) && (robot.getCol() == human.getCol()))
-			{
-				setupBoardAndPlayers();
-			}
-			 if(!currentmaze.equalsIgnoreCase("m9999.txt"))
+			 if(currentmaze!=null)
 			 {
 			 mazeFiles.nextMaze();
 			 setupBoardAndPlayers();
 			 }
-			 // sound.cheer();
+			 //sound.cheer();
 		}
 	}
-	
+		
 	/**
 	 * Checks to see if the player has reached a collectable.
 	 */
 	private void checkCollected() {
 		if (board.isCollected(human.getRow(), human.getCol()) == true) {
 			collected = true;
-			//sound.coin();
+			sound.coin();
+		}
+	}
+	
+	private void checkCollision(){
+	if((robot.getRow()== human.getRow()) && (robot.getCol() == human.getCol()))
+		{
+			setupBoardAndPlayers();
+			MazeBoard.counter=0;
+			ControlPanel.counterOutputTF.setText(Integer.toString(MazeBoard.counter));
 		}
 	}
 	
@@ -170,20 +184,24 @@ public class AController implements Runnable  {
 			String currentmaze = mazeFiles.getMazeFileName();
 			 if(currentmaze.equalsIgnoreCase("m9999.txt"))
 			 {
-			 sound.cheer();
-			 gameOver = true;
-			 try {Thread.sleep(10000);}
-			 catch (InterruptedException e) { }
-			 System.exit(0);
+				 sound.cheer();
+				 gameOver = true;
+				 System.out.println("worked");
+				 System.out.println("it worked");
+				 view.drawingPanel.drawWinner();
+				 try {
+					  Thread.sleep(3000);
+					}
+					catch (Exception e) {}
+				 
+				 try {Thread.sleep(10000);}
+				 catch (InterruptedException e) { }
+				 //System.exit(0);
 			 }
 			if(!gameOver) {
 				checkCollected();
 				robot.moveRobot(board);
-				// collision detection
-				if((robot.getRow() == human.getRow()) && (robot.getCol() == human.getCol()))
-				{
-					setupBoardAndPlayers();
-				}
+				checkCollision();
 				checkFinish();
 				view.drawingPanel.refresh();
 			}
@@ -210,7 +228,7 @@ public class AController implements Runnable  {
 		view.controlPanel.addAgainBtnActionListener(
 				new AgainBtnActionListener());
 		//view.drawingPanel.addMouseMotionListener(
-		//		new MyMouseListener());
+				//new MyMouseListener());
 		view.controlPanel.addPlayerColorCBActionListener(
 				new PlayerColorCBActionListener());
 		view.controlPanel.addPlayerShapeCBActionListener(
@@ -240,47 +258,7 @@ public class AController implements Runnable  {
 		}
 	}
 	
-	/**
-	 * Detects when the mouse is moved and moves the player icon through
-	 * the maze. Sounds are used to indicate whether the maze wall is hit.
-	 */
-	/*
-	class MyMouseListener implements MouseMotionListener {
-		boolean hitWall = true;
-		
-		int prevX, prevY;
-		
-		//addMouseListener (new MouseAdapter() {
-		public void mouseDragged(MouseEvent e) {
-			int r = human.getRow();
-			int c = human.getCol();
-			int d = view.drawingPanel.getMazeSquareSize();
 
-			if ( e.getX() < prevX - d && board.getChar( r , c - 1 ) != 'x' ) {
-				human.moveWest();
-				prevX = e.getX();
-				prevY = e.getY();
-			}
-			if ( e.getX() > prevX + d && board.getChar( r, c + 1 ) != 'x' ) {
-				human.moveEast();
-				prevX = e.getX();
-				prevY = e.getY();
-			}
-			if ( e.getY() < prevY - d && board.getChar( r - 1, c ) != 'x' ) {
-				human.moveNorth();
-				prevX = e.getX();
-				prevY = e.getY();
-			}
-			if ( e.getY() > prevY + d && board.getChar( r + 1, c ) != 'x' ) {
-				human.moveSouth();
-				prevX = e.getX();
-				prevY = e.getY();
-			}
-		
-
-			refresh();
-		}*/
-	
 	/** 
 	 * When nextBtn is clicked the next (harder) maze file is loaded and the
 	 * game is restarted.
@@ -342,7 +320,7 @@ public class AController implements Runnable  {
 	 * Detects when arrow keys are pressed and moves the player icon through
 	 * the maze. Sounds are used to indicate whether the maze wall is hit.
 	 */
-	class MyKeyListener extends KeyAdapter {
+	public class MyKeyListener extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent ke) {
 			int keyCode = ke.getKeyCode();

@@ -9,16 +9,20 @@ import javax.sound.sampled.Clip;
  * 
  * License: CC BY-SA 3.0 http://creativecommons.org/licenses/by-sa/3.0/
  * 
- * @author John Phillips Edited by Justin Kruger
+ * @author John Phillips Edited by team 4
  */
 public class MazeSound {
-	private AudioInputStream popSound, blipSound;
+	private AudioInputStream popSound, blipSound,coinSound;
 	private AudioInputStream poorFinishSound, goodFinishSound;
-	private Clip popSoundClip, blipSoundClip;
+	private Clip popSoundClip, blipSoundClip, coinSoundClip;
 	private Clip poorFinishSoundClip, goodFinishSoundClip;
 
 	public MazeSound() {
 		try {
+			coinSound = AudioSystem.getAudioInputStream(MazeSound.class
+					.getResourceAsStream("/sound/coin-drop-4.wav"));
+			coinSoundClip = AudioSystem.getClip();
+			coinSoundClip.open(coinSound);
 			popSound = AudioSystem.getAudioInputStream(MazeSound.class
 					.getResourceAsStream("/sound/pop.wav"));
 			popSoundClip = AudioSystem.getClip();
@@ -46,22 +50,35 @@ public class MazeSound {
 	}
 
 	public void pop() {
-		popSoundClip.setFramePosition(0);
-		popSoundClip.start();
+		if ( popSoundClip != null ) {
+			popSoundClip.setFramePosition(0);
+			popSoundClip.start();
+		}
 	}
 
 	public void blip() {
-		blipSoundClip.setFramePosition(0);
-		blipSoundClip.start();
+		if ( blipSoundClip != null ) {
+			blipSoundClip.setFramePosition(0);
+			blipSoundClip.start();
+		}
 	}
 
 	public void boo() {
-		poorFinishSoundClip.setFramePosition(0);
-		poorFinishSoundClip.start();
+		if ( poorFinishSoundClip != null ) {
+			poorFinishSoundClip.setFramePosition(0);
+			poorFinishSoundClip.start();
+		}
 	}
 
 	public void cheer() {
-		// goodFinishSoundClip.setFramePosition(0);
-		goodFinishSoundClip.start();
+		if ( goodFinishSoundClip != null ) {
+			// goodFinishSoundClip.setFramePosition(0);
+			goodFinishSoundClip.start();
+		}
+	}
+	public void coin(){
+		if(coinSoundClip != null){
+			coinSoundClip.start();
+		}
 	}
 }

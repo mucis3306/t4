@@ -10,6 +10,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
+
 /**
  * MVC View: sets up a GUI view for the application. It creates a frame and 
  * main panel. On the main panel goes a drawingPanel that will hold the 
@@ -18,7 +19,7 @@ import javax.swing.UIManager;
  * 
  * License: CC BY-SA 3.0 http://creativecommons.org/licenses/by-sa/3.0/
  * 
- * @author John Phillips Edited by Justin Kruger
+ * @author John Phillips Edited by team 4
  */
 public class AView {
 	JFrame frame;

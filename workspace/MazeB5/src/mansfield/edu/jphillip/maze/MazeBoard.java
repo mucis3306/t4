@@ -10,7 +10,7 @@ import java.util.Scanner;
  * 
  * License: CC BY-SA 3.0 http://creativecommons.org/licenses/by-sa/3.0/
  * 
- * @author John Phillips Edited by Justin Kruger
+ * @author John Phillips Edited by Team 4
  */
 public class MazeBoard implements MazeBoardInterface {
 	private char[][] mArray;
@@ -96,7 +96,49 @@ public class MazeBoard implements MazeBoardInterface {
 				System.out.println("worked");
 				return true;
 			}
+		} else if(currentmaze.equalsIgnoreCase("m3000.txt")) {
+			if (mArray[row][col] == '7') {
+				counter += 1;
+				ControlPanel.counterOutputTF.setText(Integer.toString(counter));
+				mArray[row][col] = 'r';
+				System.out.println("worked");
+				return true;
+			}
 		}
+		else if(currentmaze.equalsIgnoreCase("m4000.txt")) {
+			if (mArray[row][col] == '7') {
+				counter += 1;
+				ControlPanel.counterOutputTF.setText(Integer.toString(counter));
+				mArray[row][col] = 'u';
+				System.out.println("worked");
+				return true;
+			}
+		}else if(currentmaze.equalsIgnoreCase("m5000.txt")) {
+			if (mArray[row][col] == '7') {
+				counter += 1;
+				ControlPanel.counterOutputTF.setText(Integer.toString(counter));
+				mArray[row][col] = 'r';
+				System.out.println("worked");
+				return true;
+			}
+		}else if(currentmaze.equalsIgnoreCase("m6000.txt")) {
+			if (mArray[row][col] == '7') {
+				counter += 1;
+				ControlPanel.counterOutputTF.setText(Integer.toString(counter));
+				mArray[row][col] = 'd';
+				System.out.println("worked");
+				return true;
+			}
+		}else if(currentmaze.equalsIgnoreCase("m9000.txt")) {
+			if (mArray[row][col] == '7') {
+				counter += 1;
+				ControlPanel.counterOutputTF.setText(Integer.toString(counter));
+				mArray[row][col] = 'r';
+				System.out.println("worked");
+				return true;
+			}
+		}
+		
 	
 		
 		return false;
@@ -125,7 +167,7 @@ public class MazeBoard implements MazeBoardInterface {
 			for (int col = 1; col < endCol - 1; col++) {
 				if (mArray[row][col] == '1' || mArray[row][col] == '2'|| mArray[row][col] == '3'
 					|| mArray[row][col] == '4' || mArray[row][col] == '5'|| mArray[row][col] == '6'
-						|| mArray[row][col] == '8'|| mArray[row][col] == '9')
+						|| mArray[row][col] == '8'|| mArray[row][col] == '9'||mArray[row][col] == 'z')
 					pstartList.add(new Dimension(row, col));
 			}
 		}
@@ -163,7 +205,7 @@ public class MazeBoard implements MazeBoardInterface {
 		char c = mArray[row][col];
 		if (c == '-' || c == 's' || c == 'e' || c == 'g' || c == 'b' || c == '1' 
 			|| c == '2' || c == 'f'|| c =='3' || c == 'r' || c == 'u' || c == '4' || c == '5' 
-				|| c == 'd' || c == '6'  || c == '9' || c == 'h' || c == '7') {
+				|| c == 'd' || c == '6'  || c == '9' || c == 'h' || c == '7'|| c =='z') {
 			return true;
 		}
 		return false;
@@ -178,7 +220,7 @@ public class MazeBoard implements MazeBoardInterface {
 		// representing the level on which the path is placed
 		// This is so the guard or robot knows what spots are valid spots to move on,
 		// but also retain the color of the maze so the GUI doesn't show a differentiation.
-		if (c == '1' || c == '2' || c =='3' || c == '4' || c == '5' || c == '6'  || c == '9') {
+		if (c == '1' || c == '2' || c =='3' || c == '4' || c == '5' || c == '6'  || c == '9'|| c =='z') {
 			return true;
 		}
 		return false;
